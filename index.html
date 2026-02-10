@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ffccd5, #ffe6f0);
+    margin: 0;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+/* Floating Hearts */
+.heart {
+    position: absolute;
+    color: #ff4d88;
+    font-size: 24px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+h1 {
+    margin-top: 120px;
+    color: #d63384;
+    font-size: 42px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+h2 {
+    color: #ff4d88;
+    font-size: 26px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.button-container {
+    margin-top: 60px;
+}
+
+button {
+    padding: 15px 35px;
+    font-size: 18px;
+    margin: 20px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    background-color: #ff4d88;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff1a66;
+    transform: scale(1.15);
+}
+
+#no {
+    position: absolute;
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="content">
+    <h1>Hey princess ❤️</h1>
+    <h2>Will you be my Valentine? 💖</h2>
+
+    <div class="button-container">
+        <button onclick="showMessagePage()">YES 💘</button>
+        <button id="no" onmouseover="moveButton()">NO 😢</button>
+    </div>
+</div>
+
+<script>
+// Floating hearts
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 500);
+
+// Move NO button
+function moveButton() {
+    const button = document.getElementById("no");
+    const x = Math.random() * (window.innerWidth - 150);
+    const y = Math.random() * (window.innerHeight - 100);
+    button.style.left = x + "px";
+    button.style.top = y + "px";
+}
+
+// Middle Page with Updated Message (Option 2)
+function showMessagePage() {
+    document.getElementById("content").innerHTML = `
+        <h1>💌 I Want To Tell You Something... 💌</h1>
+        <div style="max-width: 700px; margin: 40px auto; font-size: 20px; line-height: 1.8; color:#b3005e; padding: 0 20px;">
+            <p>
+            First of all, I’m sorry, bebs, for asking you this a little late. 
+            You know the situation I’m in right now
+            </p>
+
+            <p>
+            I know I don’t always express my feelings the way you deserve, 
+            but please never doubt what you mean to me. 
+            My love for you is genuine and grows stronger every day. 
+            And if you already feel cared for, just know there’s even more waiting for you.
+            </p>
+
+            <p>
+            You will always be my princess. 
+            I may not always be there for every happy moment, 
+            but I promise I will always stand beside you in your difficult ones.
+            </p>
+
+            <p>
+            I will always be on your side. 
+            I will never give up on you. 
+            I’ll be with you till the end. ❤️
+            </p>
+        </div>
+
+        <div class="button-container">
+            <button onclick="finalPage()">Next 💕</button>
+        </div>
+    `;
+}
+
+// Final Page
+function finalPage() {
+    document.getElementById("content").innerHTML = `
+        <h1 style="margin-top:200px;">
+            I love you ❤️<br>
+            Can't wait for the day we celebrate 
+Valentine's Day together! 💕
+        </h1>
+    `;
+    launchConfetti();
+}
+
+// Confetti
+function launchConfetti() {
+    for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor =
+            ["#ff4d88", "#ff99bb", "#ffffff"][Math.floor(Math.random()*3)];
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+        document.body.appendChild(confetti);
+    }
+}
+</script>
+
+</body>
+</html>
